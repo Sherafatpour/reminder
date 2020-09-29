@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder/clock_view.dart';
 import 'package:reminder/data.dart';
+import 'package:reminder/enums.dart';
 import 'package:reminder/menu_info.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,73 +37,80 @@ class _HomePageState extends State<HomePage> {
             padding:
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 26.0),
             child: Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                // padding: EdgeInsets.symmetric(vertical: 16 , horizontal: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Text(
-                      "Clock",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontFamily: 'avenir'),
-                    ),
-                    SizedBox(
-                      height: 32,
-                    ),
-                    Text(
-                      formattedTime,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 64,
-                          fontFamily: 'avenir'),
-                    ),
-                    Text(
-                      formattedDate,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'avenir'),
-                    ),
-                    SizedBox(
-                      height: 64,
-                    ),
-                    ClockView(),
-                    SizedBox(
-                      height: 64,
-                    ),
-                    Text(
-                      timezone,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontFamily: 'avenir'),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Row(
+              child: Consumer<MenuInfo>(
+                builder: (BuildContext context, MenuInfo value, Widget child) {
+
+                  if(value.menuType !=MenuType.clock)return Container();
+                  return Container(
+                    alignment: Alignment.center,
+                    // padding: EdgeInsets.symmetric(vertical: 16 , horizontal: 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Icon(
-                          Icons.language,
-                          color: Colors.white,
-                        ),
                         SizedBox(
-                          width: 16,
+                          height: 32,
                         ),
                         Text(
-                          'UTC' + offsetSign + timezone,
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          "Clock",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontFamily: 'avenir'),
+                        ),
+                        SizedBox(
+                          height: 32,
+                        ),
+                        Text(
+                          formattedTime,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 64,
+                              fontFamily: 'avenir'),
+                        ),
+                        Text(
+                          formattedDate,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: 'avenir'),
+                        ),
+                        SizedBox(
+                          height: 64,
+                        ),
+                        ClockView(),
+                        SizedBox(
+                          height: 64,
+                        ),
+                        Text(
+                          timezone,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontFamily: 'avenir'),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.language,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Text(
+                              'UTC' + offsetSign + timezone,
+                              style: TextStyle(color: Colors.white, fontSize: 14),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  );
+                },
+
               ),
             ),
           ),
