@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:reminder/enums.dart';
 import 'package:reminder/homepage.dart';
+import 'package:reminder/menu_info.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: ChangeNotifierProvider<MenuInfo>(create: (context) => MenuInfo(MenuType.clock),child: HomePage(),)
     );
   }
 }
